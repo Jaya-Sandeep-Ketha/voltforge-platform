@@ -214,76 +214,6 @@ The centrepiece of the demo: a fully procedural **Power Conversion Cabinet (PCC-
 
 ---
 
-## Development Guidelines
-
-### Code Standards
-
-- **Documentation**: All functions, components, and complex logic include JSDoc comments
-- **Naming Conventions**: Consistent, descriptive naming for variables, functions, and components
-- **File Organization**: Clear separation of concerns with logical directory structure
-- **Error Handling**: Proper error boundaries and user-friendly error messages
-- **Performance**: Optimized rendering with memoization and efficient data structures
-
-### Adding New Features
-
-1. **Data Layer**: Add mock data generators in `src/data/`
-2. **Service Layer**: Create async service methods in `src/services/api.js`
-3. **State Management**: Add Zustand store slices if needed
-4. **Components**: Build reusable UI components in `src/components/`
-5. **Pages**: Create page-level components in `src/pages/`
-6. **Documentation**: Add comprehensive JSDoc comments to all new code
-
-### Testing Strategy
-
-- **Component Testing**: Unit tests for individual components
-- **Integration Testing**: End-to-end workflows between components
-- **Visual Testing**: Screenshot testing for UI consistency
-- **Performance Testing**: Bundle size optimization and render performance
-
----
-
-## Why This Project Is Relevant to Service Tooling Engineering
-
-1. **Domain alignment** — Directly models the workflows, data structures, and operational patterns of energy storage and EV charging service operations
-2. **Systems thinking** — Demonstrates understanding of asset lifecycle management, telemetry pipelines, quality validation, and incident response
-3. **3D visualization** — Shows ability to build interactive hardware inspection tools that field technicians would actually use
-4. **Data architecture** — Mock data layer mirrors real production patterns: deterministic seeding, service abstraction, filterable collections
-5. **Operational awareness** — Platform health page shows understanding of DevOps observability: latency monitoring, queue health, job tracking, log streaming
-6. **Engineering rigor** — Domain-specific terminology throughout: cell voltage delta, thermal spread, CAN bus integrity, torque specifications, LOTO procedures
-7. **Documentation Excellence** — Comprehensive code documentation ensures maintainability and knowledge transfer in engineering teams
-
----
-
-## Technical Decisions & Tradeoffs
-
-| Area                      | Decision                                                                               | Tradeoff                                                                                                            |
-| ------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **No TypeScript**         | Per project constraints — JS only                                                      | Lose compile-time type safety; mitigated by consistent naming and JSDoc-style structure                             |
-| **Seeded PRNG**           | Deterministic mock data generation                                                     | Same data every load — good for demos, not representative of real variance                                          |
-| **Procedural 3D model**   | ~500 primitives composing a realistic industrial cabinet — no external GLTF dependency | More code than loading a model file, but fully self-contained, licensable, and demonstrates R3F composition mastery |
-| **Single Zustand store**  | Simple for demo scope                                                                  | Would split into domain-specific stores (asset, viewer, auth) in production                                         |
-| **Client-side filtering** | All 120 assets loaded at once                                                          | Fine for demo; production would use server-side pagination/filtering                                                |
-| **Tailwind v4 `@theme`**  | Modern token system                                                                    | IDE CSS linters may flag `@theme` as unknown — it's valid Tailwind v4 syntax                                        |
-| **Comprehensive Docs**    | JSDoc throughout entire codebase                                                       | Increased file size; significantly improves maintainability and developer onboarding                                |
-
----
-
-## Interview Talking Points
-
-- **"Walk me through the architecture."** — Clean separation: data layer → service layer → Zustand store → components → pages. The mock API layer means swapping in real endpoints requires zero UI changes. Comprehensive documentation ensures maintainability.
-
-- **"How would you scale this?"** — Split Zustand into domain stores, add React Query for server state, implement virtualized tables for large datasets, code-split pages with lazy loading, add WebSocket for real-time telemetry, maintain documentation standards.
-
-- **"Tell me about the 3D viewer."** — A fully procedural Power Conversion Cabinet (PCC-4800) built from ~500 Three.js primitives in React Three Fiber. 16 selectable subcomponents — inverter modules with heatsink fins, DC bus with fuse holders, fan array with blade geometry, cable gland plates, indicator LEDs. Each part has click-to-select, hover glow, exploded-view animation, layer toggles, and an isolate mode. Metadata (part numbers, service scores, maintenance notes) lives in a separate data file; the 3D model is purely presentation. Zustand manages viewer state so other pages can deep-link.
-
-- **"How do you handle data?"** — Seeded deterministic generators produce 120+ assets, 25 QC runs, 40 incidents, 50 alerts, and full telemetry series. All accessed through an async service layer that simulates network latency. Every data function is documented with JSDoc explaining parameters and return values.
-
-- **"What would you do differently in production?"** — Add TypeScript, implement proper auth (SSO/RBAC), use React Query + WebSockets for real-time data, add E2E tests with Playwright, implement proper error boundaries, add accessibility (ARIA), integrate with real GLTF CAD models, maintain comprehensive documentation standards.
-
-- **"How do you ensure code quality?"** — Comprehensive JSDoc documentation throughout, ESLint configuration for code standards, consistent naming conventions, proper error handling, performance optimizations, and clear architectural patterns that make the codebase maintainable and scalable.
-
----
-
 ## Tech Stack
 
 | Tool                | Purpose                                                       |
@@ -300,18 +230,6 @@ The centrepiece of the demo: a fully procedural **Power Conversion Cabinet (PCC-
 | Lucide React        | Icon library                                                  |
 | ESLint              | Code linting and quality assurance                            |
 | JSDoc               | Code documentation standards                                  |
-
----
-
-## Contributing
-
-When contributing to this project:
-
-1. **Follow Documentation Standards**: Add JSDoc comments to all new functions, components, and complex logic
-2. **Maintain Code Quality**: Run `npm run lint` before committing
-3. **Test Thoroughly**: Ensure new features work across all existing functionality
-4. **Update Documentation**: Keep README and inline comments current with changes
-5. **Respect Architecture**: Follow established patterns for data flow, state management, and component structure
 
 ---
 
