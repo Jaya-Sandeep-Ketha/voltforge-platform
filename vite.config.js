@@ -9,6 +9,7 @@
  * - React plugin for JSX transformation and Fast Refresh
  * - Tailwind CSS plugin for utility-first styling
  * - Path alias for clean @/ imports from src directory
+ * - Base path configuration for GitHub Pages deployment
  */
 
 import { defineConfig } from "vite";
@@ -16,6 +17,9 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  // Base path for GitHub Pages deployment
+  base: "/voltforge-platform/",
+
   // Plugin configuration for React and Tailwind CSS
   plugins: [react(), tailwindcss()],
 
