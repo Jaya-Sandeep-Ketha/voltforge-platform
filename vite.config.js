@@ -10,6 +10,7 @@
  * - Tailwind CSS plugin for utility-first styling
  * - Path alias for clean @/ imports from src directory
  * - Base path configuration for GitHub Pages deployment
+ * - Build output to docs folder for GitHub Pages
  */
 
 import { defineConfig } from "vite";
@@ -22,6 +23,12 @@ export default defineConfig({
 
   // Plugin configuration for React and Tailwind CSS
   plugins: [react(), tailwindcss()],
+
+  // Build configuration
+  build: {
+    // Output to docs folder for GitHub Pages
+    outDir: "docs",
+  },
 
   // Module resolution configuration
   resolve: {
