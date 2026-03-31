@@ -52,7 +52,10 @@ const router = createBrowserRouter([
       { path: '/health', element: <PlatformHealth /> },
     ],
   },
-]);
+], {
+  // Set basename for GitHub Pages subpath deployment
+  basename: import.meta.env.BASE_URL,
+});
 
 /**
  * AppRouter Component
